@@ -18,17 +18,21 @@ export class DataDogStatsReporter {
   constructor(options: DataDogStatsReporterOptions) {
     this.apiKey = options.apiKey;
     this.metricName = options.metricName;
+
     this.validateOptions();
   }
 
-  public send(data: any) {
-    console.log(this.parseStats(data));
-    return Promise.resolve();
-    // return axios({
-    //   data: this.parseStats(data),
-    //   headers: { 'Content-Type': 'application/json' },
-    //   url: `${API_URL}?api_key=${this.apiKey}`
-    // });
+  public async send(data: any) {
+    try {
+      return await axios({
+        data: { series: this.parseStats(data) },
+        headers: { 'Content-Type': 'application/json' },
+        method: 'GET',
+        url: `${API_URL}?api_key=${this.apiKey}`
+      });
+    } catch (err) {
+      throw new Error(`DataDogStatsReporter: ${err.message}`);
+    }
   }
 
   private parseStats(stats: any) {
@@ -38,7 +42,9 @@ export class DataDogStatsReporter {
       .map((asset: any) => ({
         metric: `${this.metricName}${path.extname(asset.name)}`,
         points: [[now, asset.size / 1000 ]],
-        tags: [`chunk:${asset.chunkNames[0]}`],
+        tags: [
+          `chunk:${asset.chunkNames[0]}`
+        ],
         type: METRIC_TYPE_GAUGE
       }));
   }

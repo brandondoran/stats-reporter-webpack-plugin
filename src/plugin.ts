@@ -1,4 +1,3 @@
-import * as path from 'path';
 import * as webpack from 'webpack';
 import { StatsReporterPluginOptions } from './types';
 
@@ -9,9 +8,9 @@ const onEmit = (options: StatsReporterPluginOptions) =>
   ): Promise<any> => {
     const stats = compilation.getStats().toJson();
     try {
-      await options.reporter.send(stats);
+      const result = await options.reporter.send(stats);
     } catch(err) {
-      compilation.errors.push(err);
+      compilation.errors.push(new Error(`StatsReporterPlugin: ${err.message}`));
     }
     done()
   };
