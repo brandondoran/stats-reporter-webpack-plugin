@@ -31,7 +31,11 @@
       ".(ts)": "ts-jest"
     },
     "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|js)$",
-    "moduleFileExtensions": ["js", "json", "ts"],
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
     "testEnvironment": "node"
   },
   "keywords": [
@@ -46,12 +50,16 @@
   "author": "Brandon Doran",
   "license": "MIT",
   "devDependencies": {
+    "@semantic-release/changelog": "^3.0.1",
+    "@semantic-release/git": "^7.0.5",
+    "@semantic-release/npm": "^5.0.5",
     "@types/jest": "^23.3.5",
     "@types/node": "^10.12.0",
     "@types/webpack": "^4.4.17",
     "jest": "^23.6.0",
     "prettier": "^1.14.3",
     "rimraf": "^2.6.2",
+    "semantic-release": "^15.10.5",
     "ts-jest": "^23.10.4",
     "ts-node": "^7.0.1",
     "tslint": "^5.11.0",
