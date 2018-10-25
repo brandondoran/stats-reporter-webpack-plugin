@@ -22,14 +22,16 @@
   },
   "jest": {
     "coverageDirectory": "./coverage/",
+    "globals": {
+      "ts-jest": {
+        "diagnostics": false
+      }
+    },
     "transform": {
       ".(ts)": "ts-jest"
     },
     "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|js)$",
-    "moduleFileExtensions": [
-      "ts",
-      "js"
-    ],
+    "moduleFileExtensions": ["js", "json", "ts"],
     "testEnvironment": "node"
   },
   "keywords": [

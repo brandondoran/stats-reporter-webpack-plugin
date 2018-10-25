@@ -42,9 +42,7 @@ export class DataDogStatsReporter {
       .map((asset: any) => ({
         metric: `${this.metricName}${path.extname(asset.name)}`,
         points: [[now, asset.size / 1000 ]],
-        tags: [
-          `chunk:${asset.chunkNames[0]}`
-        ],
+        tags: [`chunk:${asset.chunkNames[0]}`],
         type: METRIC_TYPE_GAUGE
       }));
   }
