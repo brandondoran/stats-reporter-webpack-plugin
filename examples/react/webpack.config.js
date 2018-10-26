@@ -50,15 +50,13 @@ module.exports = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      // Options similar to the same options in webpackOptions.output
-      // both options are optional
       filename: "[name]-[contenthash:8].css",
       chunkFilename: "[name]-[contenthash:8].css"
     }),
     new StatsReporterPlugin({
       reporter: new DataDogStatsReporter({
-        apiKey: "foo-bar",
-        metricName: "my-app.assets"
+        apiKey: process.env.DATADOG_API_KEY,
+        metricName: "test-app.assets"
       })
     })
   ]
