@@ -11,18 +11,21 @@ const getTimestamp = () => parseInt(`${new Date().getTime() / 1000}`, 10);
 
 export interface DataDogStatsReporterOptions {
   apiKey: string;
+  gzipSize: boolean;
   metricName: string;
   tags?: string[]
 }
 
 export class DataDogStatsReporter {
   private readonly apiKey: string;
+  private readonly gzipSize: boolean;
   private readonly metricName: string;
   private readonly tags: string[];
   private readonly url: string;
 
   constructor(options: DataDogStatsReporterOptions) {
     this.apiKey = options.apiKey;
+    this.gzipSize = options.gzipSize
     this.metricName = options.metricName;
     this.tags = options.tags || [];
     this.url = `${API_URL}?api_key=${this.apiKey}`;
@@ -49,7 +52,9 @@ export class DataDogStatsReporter {
     const { assets, outputPath } = stats;
     const now = getTimestamp();
     const promises = assets.map(async (asset: any) => {
-      const size = await gzipSize.file(path.join(outputPath, asset.name));
+      const size = this.gzipSize === false
+        ? asset.size
+        : await gzipSize.file(path.join(outputPath, asset.name));
       return {
         metric: `${this.metricName}.bytes${path.extname(asset.name)}`,
         points: [[ now, size ]],
