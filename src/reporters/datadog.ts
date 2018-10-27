@@ -12,16 +12,19 @@ const getTimestamp = () => parseInt(`${new Date().getTime() / 1000}`, 10);
 export interface DataDogStatsReporterOptions {
   apiKey: string;
   metricName: string;
+  tags?: string[]
 }
 
 export class DataDogStatsReporter {
   private readonly apiKey: string;
   private readonly metricName: string;
+  private readonly tags: string[];
   private readonly url: string;
 
   constructor(options: DataDogStatsReporterOptions) {
     this.apiKey = options.apiKey;
     this.metricName = options.metricName;
+    this.tags = options.tags || [];
     this.url = `${API_URL}?api_key=${this.apiKey}`;
 
     this.validateOptions();
@@ -48,9 +51,12 @@ export class DataDogStatsReporter {
     const promises = assets.map(async (asset: any) => {
       const size = await gzipSize.file(path.join(outputPath, asset.name));
       return {
-        metric: `${this.metricName}.bytes.${path.extname(asset.name)}`,
+        metric: `${this.metricName}.bytes${path.extname(asset.name)}`,
         points: [[ now, size ]],
-        tags: [`chunk:${asset.chunkNames[0]}`],
+        tags: [
+          ...this.tags,
+          `chunk:${asset.chunkNames[0]}`
+        ],
         type: METRIC_TYPE_GAUGE
       };
     });
@@ -64,6 +70,9 @@ export class DataDogStatsReporter {
     }
     if (!this.metricName) {
       errors.push('metricName is required.');
+    }
+    if (!Array.isArray(this.tags)) {
+      errors.push('tags must be an array of strings.');
     }
     if (errors.length !== 0) {
       throw new Error(`DataDogStatsReporter: ${errors.join(' ')}`);

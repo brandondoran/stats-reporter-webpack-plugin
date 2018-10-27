@@ -56,7 +56,8 @@ module.exports = {
     new StatsReporterPlugin({
       reporter: new DataDogStatsReporter({
         apiKey: process.env.DATADOG_API_KEY,
-        metricName: "test-app.assets"
+        metricName: "test-app.assets",
+        tags: ["env:production", "framework:react"]
       })
     })
   ]
