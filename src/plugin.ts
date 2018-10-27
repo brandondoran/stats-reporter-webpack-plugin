@@ -1,7 +1,7 @@
 import * as webpack from 'webpack';
 import { StatsReporterPluginOptions } from './types';
 
-const onEmit = (options: StatsReporterPluginOptions) =>
+const onAfterEmit = (options: StatsReporterPluginOptions) =>
   async (
     compilation: webpack.compilation.Compilation,
     done: () => void
@@ -24,12 +24,12 @@ export class StatsReporterPlugin {
 
   public apply(compiler: webpack.Compiler) {
 
-    const onEmitCallback = onEmit(this.options);
+    const onAfterEmitCallback = onAfterEmit(this.options);
 
     if (compiler.hooks) {
-      compiler.hooks.emit.tapAsync('StatsReporterPlugin', onEmitCallback)
+      compiler.hooks.afterEmit.tapAsync('StatsReporterPlugin', onAfterEmitCallback)
     } else {
-      compiler.plugin('emit', onEmitCallback)
+      compiler.plugin('after-emit', onAfterEmitCallback)
     }
   }
 }
