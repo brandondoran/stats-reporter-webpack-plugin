@@ -20,7 +20,8 @@
     "src/**/*"
   ],
   "exclude": [
+    "lib",
     "node_modules",
-    "**/*-spec.ts"
+    "__tests__"
   ]
 }

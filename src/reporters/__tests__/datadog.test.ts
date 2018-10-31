@@ -10,6 +10,7 @@ describe('DataDogStatsReporter', () => {
   beforeEach(() => {
     options = {
       apiKey: 'test-key',
+      gzipSize: true,
       metricName: 'testapp.assets'
     };
     reporter = new DataDogStatsReporter(options);
@@ -17,23 +18,29 @@ describe('DataDogStatsReporter', () => {
 
   describe('constructor', () => {
     it('should be an instance of DataDogStatsReporter', () => {
-      expect(reporter).toBeInstanceOf(DataDogStatsReporter)
+      expect(reporter).toBeInstanceOf(DataDogStatsReporter);
     });
 
     it('should throw if options.apiKey is missing', () => {
       delete options.apiKey;
-      expect(() => new DataDogStatsReporter(options)).toThrowErrorMatchingSnapshot();
+      expect(
+        () => new DataDogStatsReporter(options)
+      ).toThrowErrorMatchingSnapshot();
     });
 
     it('should throw if options.metricName is missing', () => {
       delete options.metricName;
-      expect(() => new DataDogStatsReporter(options)).toThrowErrorMatchingSnapshot();
+      expect(
+        () => new DataDogStatsReporter(options)
+      ).toThrowErrorMatchingSnapshot();
     });
 
     it('should throw if multiple options are missing', () => {
       delete options.apiKey;
       delete options.metricName;
-      expect(() => new DataDogStatsReporter(options)).toThrowErrorMatchingSnapshot();
+      expect(
+        () => new DataDogStatsReporter(options)
+      ).toThrowErrorMatchingSnapshot();
     });
   });
 });

@@ -76,6 +76,9 @@
   "peerDependencies": {
     "webpack": ">=1.0.0"
   },
+  "prettier": {
+    "singleQuote": true
+  },
   "release": {
     "verifyConditions": [
       "@semantic-release/changelog",
