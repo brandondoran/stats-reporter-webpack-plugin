@@ -47,7 +47,14 @@
     "instrumentation",
     "datadog"
   ],
-  "author": "Brandon Doran",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/brandondoran/stats-reporter-webpack-plugin.git"
+  },
+  "author": {
+    "name": "Brandon Doran",
+    "email": "bdoran@gmail.com"
+  },
   "license": "MIT",
   "devDependencies": {
     "@semantic-release/changelog": "^3.0.1",

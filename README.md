@@ -11,15 +11,15 @@ $ npm install --save-dev stats-reporter-webpack-plugin
 ## Usage
 
 ```js
-var { StatsPlugin, DataDogStatsReporter } = require("stats-webpack-plugin");
+const { StatsPlugin, DataDogStatsReporter } = require('stats-webpack-plugin');
 
 module.exports = {
   plugins: [
     new StatsReporterPlugin({
       reporter: new DataDogStatsReporter({
         apiKey: process.env.DD_API_KEY,
-        metricName: "my-app.assets",
-        tags: ["app:my-app", "env:production"]
+        metricName: 'my-app.assets',
+        tags: ['app:my-app', 'env:production']
       })
     })
   ]
