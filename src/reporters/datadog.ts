@@ -52,7 +52,7 @@ export class DataDogStatsReporter implements StatsReporter {
     }
   }
 
-  private filterAssets(stats: any) {
+  private filterAssets(stats: any): string[] {
     const { assets } = stats;
     if (!this.test) {
       return assets;
@@ -72,14 +72,18 @@ export class DataDogStatsReporter implements StatsReporter {
       return {
         metric: `${this.metricName}.bytes${path.extname(asset.name)}`,
         points: [[now, size]],
-        tags: [...this.tags, `chunk:${asset.chunkNames[0]}`],
+        tags: [
+          ...this.tags,
+          `chunk:${asset.chunkNames[0]}`,
+          `type:${path.extname(asset.name).substring(1)}`
+        ],
         type: METRIC_TYPE_GAUGE
       };
     });
     return Promise.all(promises);
   }
 
-  private validateOptions() {
+  private validateOptions(): void {
     const errors = [];
     if (!this.apiKey) {
       errors.push('apiKey is required.');

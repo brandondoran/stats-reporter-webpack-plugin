@@ -53,5 +53,7 @@ new DataDogStatsReporter(options: DataDogStatsReporterOptions);
 - `apiKey: string`: Your DataDog API key
 - `gzipSize?: boolean = true`: Report gzipped size if true, uncompressed size if false
 - `metricName: string`: The base name for the metric
-- `tags?: string[]`: Custom tags for the metric. A `chunk` tag is always added.
+- `tags?: string[]`: Custom tags for the metric. The following tags are always added:
+  * `chunk`: the chunk name
+  * `type`: the type of asset (js, css, etc)
 - `test?: RegExp`: Test to match files against. If not set, stats for all emitted assets will be sent.
