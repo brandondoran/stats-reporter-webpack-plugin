@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/brandondoran/stats-reporter-webpack-plugin/compare/v1.1.0...v1.1.1) (2018-11-01)
+
+
+### Bug Fixes
+
+* **package:** remove unnecessary dependencies ([3e3d863](https://github.com/brandondoran/stats-reporter-webpack-plugin/commit/3e3d863))
+
 # [1.1.0](https://github.com/brandondoran/stats-reporter-webpack-plugin/compare/v1.0.0...v1.1.0) (2018-11-01)
 
 
