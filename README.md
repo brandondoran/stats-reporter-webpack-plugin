@@ -11,7 +11,7 @@ $ npm install --save-dev stats-reporter-webpack-plugin
 ## Usage
 
 ```js
-const { StatsPlugin, DataDogStatsReporter } = require('stats-webpack-plugin');
+const { StatsPlugin, DataDogStatsReporter } = require('stats-reporter-webpack-plugin');
 
 module.exports = {
   plugins: [
