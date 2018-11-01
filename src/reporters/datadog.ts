@@ -1,6 +1,7 @@
 import axios from 'axios';
 import * as gzipSize from 'gzip-size';
 import * as path from 'path';
+import { StatsReporter } from '../types';
 
 const API_URL = 'https://app.datadoghq.com/api/v1/series';
 const METRIC_TYPE_GAUGE = 'gauge';
@@ -13,21 +14,24 @@ export interface DataDogStatsReporterOptions {
   apiKey: string;
   gzipSize: boolean;
   metricName: string;
-  tags?: string[]
+  tags?: string[];
+  test?: RegExp;
 }
 
-export class DataDogStatsReporter {
+export class DataDogStatsReporter implements StatsReporter {
   private readonly apiKey: string;
   private readonly gzipSize: boolean;
   private readonly metricName: string;
   private readonly tags: string[];
+  private readonly test?: RegExp;
   private readonly url: string;
 
   constructor(options: DataDogStatsReporterOptions) {
     this.apiKey = options.apiKey;
-    this.gzipSize = options.gzipSize
+    this.gzipSize = options.gzipSize;
     this.metricName = options.metricName;
     this.tags = options.tags || [];
+    this.test = options.test;
     this.url = `${API_URL}?api_key=${this.apiKey}`;
 
     this.validateOptions();
@@ -36,7 +40,7 @@ export class DataDogStatsReporter {
   public async send(stats: any) {
     try {
       const series = await this.parseStats(stats);
-      // console.log(require('util').inspect(series, {showHidden: false, depth: null}));
+      // console.log(require('util').inspect(series, { showHidden: false, depth: null }));
       return await axios({
         data: { series },
         headers,
@@ -48,20 +52,27 @@ export class DataDogStatsReporter {
     }
   }
 
+  private filterAssets(stats: any) {
+    const { assets } = stats;
+    if (!this.test) {
+      return assets;
+    }
+    return assets.filter((asset: any) => this.test!.test(asset.name));
+  }
+
   private parseStats(stats: any) {
-    const { assets, outputPath } = stats;
+    const { outputPath } = stats;
+    const assets = this.filterAssets(stats);
     const now = getTimestamp();
     const promises = assets.map(async (asset: any) => {
-      const size = this.gzipSize === false
-        ? asset.size
-        : await gzipSize.file(path.join(outputPath, asset.name));
+      const size =
+        this.gzipSize === false
+          ? asset.size
+          : await gzipSize.file(path.join(outputPath, asset.name));
       return {
         metric: `${this.metricName}.bytes${path.extname(asset.name)}`,
-        points: [[ now, size ]],
-        tags: [
-          ...this.tags,
-          `chunk:${asset.chunkNames[0]}`
-        ],
+        points: [[now, size]],
+        tags: [...this.tags, `chunk:${asset.chunkNames[0]}`],
         type: METRIC_TYPE_GAUGE
       };
     });

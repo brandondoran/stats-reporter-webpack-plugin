@@ -1,7 +1,7 @@
-export interface Reporter {
+export interface StatsReporter {
   send: (stats: any) => Promise<any>;
 }
 
 export interface StatsReporterPluginOptions {
-  reporter: Reporter;
-};
+  reporter: StatsReporter;
+}
