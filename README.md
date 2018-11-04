@@ -1,5 +1,7 @@
 # Stats reporting plugin for webpack
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/brandondoran/stats-reporter-webpack-plugin.svg)](https://greenkeeper.io/)
+
 Send the stats of a build to a reporting service. Currently DataDog is the only reporter implemented.
 
 ## Installation
