@@ -62,7 +62,7 @@
     "@semantic-release/npm": "^5.0.5",
     "@types/gzip-size": "^4.1.0",
     "@types/jest": "^23.3.5",
-    "@types/node": "^10.12.0",
+    "@types/node": "^11.9.0",
     "@types/webpack": "^4.4.17",
     "jest": "^23.6.0",
     "prettier": "^1.14.3",
