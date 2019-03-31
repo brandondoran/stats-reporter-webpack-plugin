@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/brandondoran/stats-reporter-webpack-plugin/compare/v1.1.1...v1.1.2) (2019-03-31)
+
+
+### Bug Fixes
+
+* **package:** upgrade all packages to latest ([#12](https://github.com/brandondoran/stats-reporter-webpack-plugin/issues/12)) ([6878818](https://github.com/brandondoran/stats-reporter-webpack-plugin/commit/6878818)), closes [#7](https://github.com/brandondoran/stats-reporter-webpack-plugin/issues/7) [#8](https://github.com/brandondoran/stats-reporter-webpack-plugin/issues/8) [#9](https://github.com/brandondoran/stats-reporter-webpack-plugin/issues/9) [#10](https://github.com/brandondoran/stats-reporter-webpack-plugin/issues/10) [#11](https://github.com/brandondoran/stats-reporter-webpack-plugin/issues/11)
+
 ## [1.1.1](https://github.com/brandondoran/stats-reporter-webpack-plugin/compare/v1.1.0...v1.1.1) (2018-11-01)
 
 
