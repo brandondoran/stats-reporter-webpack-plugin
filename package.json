@@ -58,7 +58,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@semantic-release/changelog": "^3.0.2",
+    "@semantic-release/changelog": "^3.0.6",
     "@semantic-release/git": "^7.0.8",
     "@semantic-release/npm": "^5.1.4",
     "@types/gzip-size": "^4.1.0",
