@@ -1,3 +1,10 @@
+## [1.1.3](https://github.com/brandondoran/stats-reporter-webpack-plugin/compare/v1.1.2...v1.1.3) (2020-02-24)
+
+
+### Bug Fixes
+
+* **deps:** update all deps to latest ([#91](https://github.com/brandondoran/stats-reporter-webpack-plugin/issues/91)) ([0ea43d4](https://github.com/brandondoran/stats-reporter-webpack-plugin/commit/0ea43d4075f3d29903634c6affde4c6e27c84657))
+
 ## [1.1.2](https://github.com/brandondoran/stats-reporter-webpack-plugin/compare/v1.1.1...v1.1.2) (2019-03-31)
 
 
