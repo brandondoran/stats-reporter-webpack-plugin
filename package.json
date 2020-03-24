@@ -80,7 +80,7 @@
     "gzip-size": "^5.1.1"
   },
   "peerDependencies": {
-    "webpack": ">=1.0.0"
+    "webpack": ">=4.42.1"
   },
   "prettier": {
     "singleQuote": true
