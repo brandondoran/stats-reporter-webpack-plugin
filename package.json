@@ -76,7 +76,7 @@
     "typescript": "^3.8.2"
   },
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "gzip-size": "^5.1.1"
   },
   "peerDependencies": {
